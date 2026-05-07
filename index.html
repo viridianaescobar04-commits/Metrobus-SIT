@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrobús SIT Tampico | Movilidad Integrada</title>
+    <!-- Fuente Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconos y Frameworks -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --color-rosa: #e7275f;
+            --color-naranja: #f39200;
+            --color-azul: #246db5;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Colores personalizados */
+        .text-sit-rosa { color: var(--color-rosa); }
+        .text-sit-naranja { color: var(--color-naranja); }
+        .text-sit-azul { color: var(--color-azul); }
+        .bg-sit-rosa { background-color: var(--color-rosa); }
+        .bg-sit-naranja { background-color: var(--color-naranja); }
+        .bg-sit-azul { background-color: var(--color-azul); }
+        .border-sit-rosa { border-color: var(--color-rosa); }
+        .border-sit-naranja { border-color: var(--color-naranja); }
+        .border-sit-azul { border-color: var(--color-azul); }
+
+        /* Animaciones */
+        .card-interaction {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-interaction:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-underline {
+            position: relative;
+        }
+        .nav-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--color-rosa);
+            transition: width 0.3s ease;
+        }
+        .nav-underline:hover::after {
+            width: 100%;
+        }
+
+        /* Hero shape */
+        .wave-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            line-height: 0;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-azul);
+            border-radius: 4px;
+        }
+
+        /* Floating Animation for Mascot */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Navegación -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100 shadow-sm">
+        <div class="container mx-auto px-4 h-20 flex justify-between items-center">
+            <!-- Logo SIT (SVG Recreado) -->
+            <div class="flex items-center space-x-2">
+                <a href="/"> <img src="SIT.svg" width="150" height="auto">
+                </a>
+            </div>
+
+            <!-- Menú Escritorio -->
+            <nav class="hidden md:flex items-center space-x-10 font-medium">
+                <a href="#inicio" class="nav-underline transition-colors hover:text-sit-rosa">Inicio</a>
+                <a href="#informacion" class="nav-underline transition-colors hover:text-sit-rosa">Sobre SIT</a>
+                <a href="#mascota" class="nav-underline transition-colors hover:text-sit-rosa">Tlacua</a>
+                <a href="#mapa" class="nav-underline transition-colors hover:text-sit-rosa">Mapa Digital</a>
+                <a href="#contacto" class="nav-underline transition-colors hover:text-sit-rosa text-sit-azul">Contacto</a>
+            </nav>
+
+            <button class="md:hidden text-sit-azul" id="mobile-menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Menú Móvil -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[60] bg-white p-8 space-y-6 md:hidden">
+        <button class="absolute top-6 right-6" id="close-menu-btn">
+            <i data-lucide="x" class="text-sit-rosa"></i>
+        </button>
+        <a href="#inicio" class="block text-2xl font-bold text-sit-azul">Inicio</a>
+        <a href="#informacion" class="block text-2xl font-bold">Sobre SIT</a>
+        <a href="#mascota" class="block text-2xl font-bold">Tlacua</a>
+        <a href="#mapa" class="block text-2xl font-bold">Mapa Digital</a>
+        <a href="#contacto" class="block text-2xl font-bold">Contacto</a>
+    </div>
+
+    <!-- Hero Section con Mockup de Bus -->
+    <section id="inicio" class="relative bg-sit-azul text-white pt-16 pb-32 lg:pt-24 lg:pb-48 overflow-hidden">
+        <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center gap-12 relative z-10">
+            <div class="lg:w-1/2 text-center lg:text-left">
+                <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight">
+                    Transformando el transporte en <span class="text-sit-naranja">Tampico</span>
+                </h1>
+                <p class="text-lg lg:text-xl opacity-90 mb-8 max-w-lg mx-auto lg:mx-0">
+                    Bienvenido al Metrobús SIT. Un sistema de transporte diseñado para ser moderno, seguro e incluyente para todos los tampiqueños.
+                </p>
+                <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                    <a href="#informacion" class="bg-sit-rosa hover:bg-white hover:text-sit-rosa px-8 py-4 rounded-2xl font-bold transition-all shadow-lg flex items-center">
+                        Conocer más <i data-lucide="arrow-right" class="ml-2 w-5"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="lg:w-1/2 flex justify-center relative">
+                <!-- Imagen Mockup Bus Aislado -->
+                <img src="Gemini_Generated_Image_afwkotafwkotafwk.png" alt="Mockup Metrobús SIT" class="relative z-20 w-full max-w-xl drop-shadow-2xl transition-transform hover:scale-105 duration-500">
+                
+                <!-- Elemento decorativo detrás -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-sit-rosa rounded-full blur-[100px] opacity-40"></div>
+            </div>
+        </div>
+        
+        <!-- Wave Decor -->
+        <div class="wave-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120">
+                <path fill="#f8fafc" fill-opacity="1" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Botones Principales -->
+    <section class="py-12 -mt-16 lg:-mt-24 relative z-30">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Inicio -->
+                <a href="#inicio" class="card-interaction bg-white p-8 rounded-3xl shadow-xl border-b-4 border-sit-azul flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-blue-50 text-sit-azul rounded-2xl flex items-center justify-center mb-4 group-hover:bg-sit-azul group-hover:text-white transition-colors">
+                        <i data-lucide="home" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Inicio</h3>
+                    <p class="text-sm text-slate-500">Regresa a la sección principal informativa.</p>
+                </a>
+
+                <!-- Juego Interactivo -->
+                <a href="https://gemini.google.com/share/9c63f8c088d5" target="_blank" class="card-interaction bg-white p-8 rounded-3xl shadow-xl border-b-4 border-sit-naranja flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-orange-50 text-sit-naranja rounded-2xl flex items-center justify-center mb-4 group-hover:bg-sit-naranja group-hover:text-white transition-colors">
+                        <i data-lucide="gamepad-2" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Juego Interactivo</h3>
+                    <p class="text-sm text-slate-500">Aprende sobre movilidad de forma divertida.</p>
+                </a>
+
+                <!-- Chatbot WhatsApp -->
+                <a href="https://gemini.google.com/share/d6facc0e6287" target="_blank" class="card-interaction bg-white p-8 rounded-3xl shadow-xl border-b-4 border-sit-rosa flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-pink-50 text-sit-rosa rounded-2xl flex items-center justify-center mb-4 group-hover:bg-sit-rosa group-hover:text-white transition-colors">
+                        <i data-lucide="message-circle" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Chatbot</h3>
+                    <p class="text-sm text-slate-500">Asistencia ciudadana las 24 horas.</p>
+                </a>
+
+                <!-- Mapa Digital -->
+                <a href="#mapa" class="card-interaction bg-white p-8 rounded-3xl shadow-xl border-b-4 border-sit-azul flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-blue-50 text-sit-azul rounded-2xl flex items-center justify-center mb-4 group-hover:bg-sit-azul group-hover:text-white transition-colors">
+                        <i data-lucide="map-pinned" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Mapa Digital</h3>
+                    <p class="text-sm text-slate-500">Ubica tus rutas y estaciones favoritas.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Mascota (NUEVA) -->
+    <section id="mascota" class="py-24 bg-white overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 flex justify-center order-2 lg:order-1">
+                    <div class="relative">
+                        <!-- Imagen Mascota Tlacua -->
+                        <div class="bg-gray-100 rounded-full w-80 h-80 lg:w-[450px] lg:h-[450px] flex items-center justify-center relative overflow-hidden border-8 border-white shadow-2xl">
+                            <img src="tlacua.png" alt="Tlacua - Mascota SIT" class="w-full h-full object-cover floating">
+                        </div>
+                        <!-- Decoración -->
+                        <div class="absolute -bottom-4 -right-4 bg-sit-rosa text-white p-6 rounded-3xl shadow-xl z-20">
+                            <p class="text-xl font-bold italic">¡Hola, soy Tlacua!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 order-1 lg:order-2">
+                    <h2 class="text-sit-naranja font-bold uppercase tracking-widest text-sm mb-4">Conoce a nuestro guía</h2>
+                    <h3 class="text-3xl lg:text-5xl font-extrabold mb-8 text-slate-900 leading-tight">
+                        Tlacua: Tu asistente de movilidad
+                    </h3>
+                    <p class="text-slate-600 mb-8 text-lg leading-relaxed">
+                        Tlacua no es solo nuestra mascota; es tu mejor aliado en el camino. Como experto en las rutas de Tampico, él está aquí para resolver tus dudas, guiarte por las estaciones y enseñarte cómo cuidar nuestro nuevo sistema de transporte.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4 bg-sit-azul/5 p-4 rounded-2xl">
+                            <i data-lucide="headphones" class="text-sit-azul"></i>
+                            <span class="font-medium">Siempre conectado para ayudarte en el chatbot.</span>
+                        </div>
+                        <div class="flex items-center space-x-4 bg-sit-rosa/5 p-4 rounded-2xl">
+                            <i data-lucide="heart" class="text-sit-rosa"></i>
+                            <span class="font-medium">Orgullosamente tampiqueño y promotor del respeto.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Informativa SIT con Mockups -->
+    <section id="informacion" class="py-24 bg-slate-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2">
+                    <div class="inline-block px-4 py-1 rounded-full bg-sit-rosa/10 text-sit-rosa font-bold text-xs uppercase tracking-widest mb-6">Información Institucional</div>
+                    <h2 class="text-3xl lg:text-5xl font-extrabold mb-8 text-slate-900 leading-tight">
+                        Un sistema pensado para el bienestar de Tampico
+                    </h2>
+                    <p class="text-slate-600 mb-8 text-lg leading-relaxed">
+                        El Sistema de Transporte Integrado (SIT) utiliza unidades de última generación para asegurar traslados rápidos y seguros. Nuestra flota ha sido diseñada bajo los más altos estándares internacionales de calidad.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-sit-naranja/10 text-sit-naranja rounded-full flex items-center justify-center">
+                                <i data-lucide="bus" class="w-6 h-6"></i>
+                            </div>
+                            <span class="font-semibold">Unidades Modernas</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-sit-rosa/10 text-sit-rosa rounded-full flex items-center justify-center">
+                                <i data-lucide="accessibility" class="w-6 h-6"></i>
+                            </div>
+                            <span class="font-semibold">Inclusión Total</span>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-white border-l-4 border-sit-azul rounded-r-2xl shadow-sm">
+                        <p class="text-sm text-slate-500 italic">
+                            * Los tiempos de llegada son estimativos y dependen de factores externos como el tráfico y condiciones climáticas.
+                        </p>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 relative">
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Mockup Ciudad -->
+                        <div class="col-span-2 bg-white rounded-[2rem] overflow-hidden shadow-xl border-4 border-white h-72">
+                            <img src="Gemini_Generated_Image_btazngbtazngbtaz.png" alt="Metrobús SIT en Ciudad" class="w-full h-full object-cover transition-transform hover:scale-105 duration-700">
+                        </div>
+                        <!-- Mockup Aéreo -->
+                        <div class="col-span-2 bg-white rounded-[2rem] overflow-hidden shadow-xl border-4 border-white h-64">
+                            <img src="Gemini_Generated_Image_6dhj7p6dhj7p6dhj.png" alt="Vista aérea Metrobús SIT" class="w-full h-full object-cover transition-transform hover:scale-105 duration-700">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mapa Digital Section -->
+    <section id="mapa" class="py-24 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Encuentra tu ruta</h2>
+            <p class="text-slate-600 mb-12 max-w-2xl mx-auto">Nuestro mapa digital interactivo te ayuda a planificar tu viaje visualizando estaciones y líneas disponibles.</p>
+            
+            <div class="bg-slate-50 rounded-[3rem] shadow-2xl overflow-hidden min-h-[500px] border border-slate-100 flex flex-col items-center justify-center p-12 relative">
+                <!-- Visual del Mapa -->
+                <div class="absolute inset-0 opacity-10">
+                    <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M0,20 L100,20 M0,40 L100,40 M0,60 L100,60 M0,80 L100,80 M20,0 L20,100 M40,0 L40,100 M60,0 L60,100 M80,0 L80,100" stroke="#246db5" stroke-width="0.5" fill="none"/>
+                    </svg>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="w-24 h-24 bg-white rounded-full shadow-lg flex items-center justify-center mb-8 mx-auto">
+                        <i data-lucide="map" class="w-12 h-12 text-sit-azul"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-4">Cargando Mapa del Sistema...</h4>
+                    <p class="text-slate-500 mb-8 max-w-sm mx-auto">Estamos conectando con el servicio de geolocalización de Tampico.</p>
+                    <button class="bg-sit-azul text-white px-10 py-4 rounded-2xl font-bold shadow-lg hover:bg-sit-rosa transition-all">
+                        Habilitar GPS
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de Contacto -->
+    <section id="contacto" class="py-24 bg-slate-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto flex flex-col lg:flex-row bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-slate-100">
+                <div class="lg:w-2/5 bg-sit-azul p-12 text-white">
+                    <h3 class="text-3xl font-bold mb-8 text-white">Atención Ciudadana</h3>
+                    <p class="mb-10 text-white/80 text-lg">Tu opinión nos ayuda a construir un mejor servicio. Envíanos tus dudas o sugerencias de mejora.</p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-center group">
+                            <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center mr-5 group-hover:bg-white/40 transition-all">
+                                <i data-lucide="phone" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase font-bold text-white/60 tracking-widest">Atención telefónica</p>
+                                <p class="text-xl font-bold">833 000 0000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center group">
+                            <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center mr-5 group-hover:bg-white/40 transition-all">
+                                <i data-lucide="mail" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase font-bold text-white/60 tracking-widest">Correo institucional</p>
+                                <p class="text-xl font-bold">atencion@sit-tampico.gob.mx</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-3/5 p-12">
+                    <h4 class="text-2xl font-bold mb-8 text-slate-900">Formulario de Sugerencias</h4>
+                    <form id="sitForm" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">Nombre completo</label>
+                                <input type="text" placeholder="Ej. María García" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-sit-rosa outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">Correo de contacto</label>
+                                <input type="email" placeholder="correo@ejemplo.com" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-sit-rosa outline-none transition-all">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Asunto</label>
+                            <select class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-sit-rosa outline-none transition-all appearance-none">
+                                <option>Duda sobre servicio</option>
+                                <option>Sugerencia de ruta</option>
+                                <option>Reporte de unidad</option>
+                                <option>Otro asunto</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Mensaje</label>
+                            <textarea rows="4" placeholder="Escribe aquí tu duda o comentario de forma detallada..." class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-sit-rosa outline-none transition-all"></textarea>
+                        </div>
+                        <button type="button" onclick="handleSubmit()" class="w-full bg-sit-azul text-white font-bold py-4 rounded-2xl hover:bg-sit-rosa transition-all shadow-lg flex justify-center items-center text-lg">
+                            Enviar Mensaje <i data-lucide="send" class="ml-3 w-5 h-5"></i>
+                        </button>
+                    </form>
+                    <div id="success-message" class="hidden mt-6 p-6 bg-green-50 border border-green-100 text-green-700 rounded-2xl text-center font-bold animate-pulse">
+                        ¡Recibido! Tu mensaje ha sido enviado correctamente al equipo de atención.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 pt-20 pb-10 border-t-8 border-sit-naranja">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <div class="mb-8">
+                        <span class="text-white font-bold text-3xl">SIT</span>
+                        <div class="h-1 w-12 bg-sit-rosa mt-1"></div>
+                    </div>
+                    <p class="text-sm leading-relaxed">Sistema Integrado de Transporte de Tampico. Un proyecto del Gobierno Municipal para mejorar la calidad de vida urbana.</p>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-8 uppercase tracking-widest text-xs">Sistema</h5>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="#informacion" class="hover:text-sit-rosa transition-colors">¿Qué es el SIT?</a></li>
+                        <li><a href="#" class="hover:text-sit-rosa transition-colors">Rutas y Estaciones</a></li>
+                        <li><a href="#" class="hover:text-sit-rosa transition-colors">Tarifas y Pagos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-8 uppercase tracking-widest text-xs">Ciudadanía</h5>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="#" class="hover:text-sit-naranja transition-colors">Preguntas Frecuentes</a></li>
+                        <li><a href="#" class="hover:text-sit-naranja transition-colors">Buzón de quejas</a></li>
+                        <li><a href="#" class="hover:text-sit-naranja transition-colors">Objetos perdidos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-8 uppercase tracking-widest text-xs">Síguenos</h5>
+                    <div class="flex space-x-4 mb-8">
+                        <a href="#" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-sit-azul transition-all">
+                            <i data-lucide="facebook" class="w-5 h-5 text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-sit-azul transition-all">
+                            <i data-lucide="twitter" class="w-5 h-5 text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-sit-azul transition-all">
+                            <i data-lucide="instagram" class="w-5 h-5 text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase tracking-widest">
+                <p>&copy; 2026 Gobierno Municipal de Tampico. Todos los derechos reservados.</p>
+                <div class="flex space-x-8 mt-6 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Privacidad</a>
+                    <a href="#" class="hover:text-white transition-colors">Accesibilidad</a>
+                    <a href="#" class="hover:text-white transition-colors">Transparencia</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar iconos
+        lucide.createIcons();
+
+        // Control de Menú Móvil
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.onclick = () => mobileMenu.classList.remove('hidden');
+        closeBtn.onclick = () => mobileMenu.classList.add('hidden');
+
+        // Función de envío de formulario (Simulada)
+        function handleSubmit() {
+            const form = document.getElementById('sitForm');
+            const success = document.getElementById('success-message');
+            
+            form.style.opacity = '0.5';
+            form.style.pointerEvents = 'none';
+            success.classList.remove('hidden');
+            
+            setTimeout(() => {
+                form.reset();
+                form.style.opacity = '1';
+                form.style.pointerEvents = 'auto';
+                success.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Navegación Suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
